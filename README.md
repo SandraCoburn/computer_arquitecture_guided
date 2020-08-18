@@ -33,3 +33,39 @@ F D
 
 color: #ffff00
 color: rgb(255,255,0) (green, red, blue)
+
+## Bitwise operations:
+
+- AND, OR, NOT, XOR, NOR, NAND
+
+### "AND masking", stencil
+
+- subnet mask 255.255.255.0
+
+#### Bitwise AND can mask out parts of a number, or clean individual bits of a numer to 0
+
+#### Bitwise OR can set individual bits (or groups of bits) to 1
+
+## Bit Shifting
+
+-
+
+## Analogy in Base 10 of extracting numbers. shiftin bites it's like deviding by the base
+
+vv
+1234567
+0123456 shift 3 right (AKA // 1000)
+0012345
+0001234
+
+00000034 mask out the 34
+
+## Now in Binary
+
+0101001010110 shift right by 6
+& 0001111 mask the resutl
+
+if n is a power of 2:
+x % n
+is the same as
+x & (n-1)
