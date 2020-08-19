@@ -48,7 +48,7 @@ color: rgb(255,255,0) (green, red, blue)
 
 ## Bit Shifting
 
--
+- 01100111 >> 6 #it will shift 6 numbers = 01
 
 ## Analogy in Base 10 of extracting numbers. shiftin bites it's like deviding by the base
 
@@ -69,3 +69,15 @@ if n is a power of 2:
 x % n
 is the same as
 x & (n-1)
+
+## Where to store variables if we have too many for the registers?
+
+- Stack: push, pop, storage
+- RAM == memory
+- Registers, caches, RAM, hard drive
+- memory: a way to store info and get it back
+- For the project:
+  - Stack pointer starts at the top at F3 because the ones before that are reserved for something else
+  - Stack bottom is reserved for the instructions at the bottom of thestack
+
+godbolt.org -- to check how the stack works

@@ -5,7 +5,8 @@ PRINT_NUM   = 0b11 # 3 opcode 3
 SAVE        = 0b100
 PRINT_REG   = 0b101 #opcode 5
 ADD         = 0b110 #registers[2] = registers[2] + registers[3]
-
+PUSH        = 0b111
+POP         = 0b1000
 
 #Save the number 99 into R2
 # R0-R7
@@ -26,15 +27,26 @@ memory = [
     3, #register to look at
     PRINT_REG,
     2, #register to look at 
+    SAVE,
+    4, #register to save at
+    42, #number to save
+    PUSH,
+    3, #Register to look at when push is in R4
+    POP,
+    4, #register to pop into
+    PRINT_REG,
+    4,
     HALT,
+    
 ]
 
 #Write a pogram to pull each command out of memory and execute
 
 # We can loop over it!
 # register aka memory
-registers = [0] * 8
+registers = [0] * 
 # [0,0,99,0,0,0,0,0] Save 99 into R2
+registers[7] = 0xF4
 
 pc = 0 #program counter
 running = True
@@ -64,5 +76,31 @@ while running:
 
         registers[first_reg] = registers[first_reg] + registers[sec_reg]
         pc += 2
+    if command == PUSH:
+        registers[7] -= 1 #stack pointer decrement
+
+        # get a value from the register number
+        reg = memory[pc + 1]
+        # get the value from the given register
+        value = registers[reg]
+        # put it on the stack at the pointer address
+        sp = registers[7]
+        memory[sp] = value
+        pc += 1
+    if command == POP:
+        # get the stack pointer (where o we look?)
+        sp = registers[7]
+        # get register number to put value in
+        reg = memory[pc+1]
+        # use stack pointer to get the value
+        value = memory[sp]
+        #put the value into the given register
+        registers[reg] = value
+        #increment our stack pointer
+        registers[7] += 1
+        # icnrement our program counter
+        pc += 1
+        
+
     pc += 1
 

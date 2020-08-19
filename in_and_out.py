@@ -12,9 +12,9 @@ try:
 
             if command == "":
                 continue
-            num = int(command)
+            num = int(command, 2)
             #print(type(command))
-            print(num)
+            print(f"{num:8b} is {num}")
 
 except FileNotFoundError:
     print(f"{sys.argv[0]}: {sys.argv[1]} file was not found")
