@@ -10,12 +10,12 @@
 
           16's place
 
-  +------ 8's place (0b1000's place)
-  |+----- 4's place (0b100's place)
-  ||+---- 2's place (0b10's place)
-  |||+--- 1's place (0b1's place)
-  ||||
-  1010
+  - +------ 8's place (0b1000's place)
+  - |+----- 4's place (0b100's place)
+  - ||+---- 2's place (0b10's place)
+  - |||+--- 1's place (0b1's place)
+  - |||
+  - 1010
 
 11011 = 1*16 + 1*8 + 0*4 + 1*2 + 1\*1 = 27
 
