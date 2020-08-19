@@ -44,7 +44,7 @@ memory = [
 
 # We can loop over it!
 # register aka memory
-registers = [0] * 
+registers = [0] * 8
 # [0,0,99,0,0,0,0,0] Save 99 into R2
 registers[7] = 0xF4
 
