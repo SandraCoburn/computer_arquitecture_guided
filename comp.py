@@ -4,6 +4,7 @@
 # 3 - SAVE_REG store a value in a register
 # 4 - PRINT_REG print the register value ind ecimal
 import sys
+import dis
 memory = [0] * 256 # think of as a big array of bytes, 8-bits per byte
 address = 0
 registers = [0] * 8
@@ -113,10 +114,10 @@ while running:
     else:
         print(f"Invalid instruction {ir} code at address {pc}")
         sys.exit()
-    
-    '''
-    #This doesn't work for this guided but will for the ls8.py :
-    number_of_arguments = ir >> 6 #right shift number by 6
-    size_of_this_instruction = number_of_arguments + 1
-    pc += size_of_this_instruction
-    '''
+dis.dis("__main__")  #to check for the amount of memory
+'''
+#This doesn't work for this guided but will for the ls8.py :
+number_of_arguments = ir >> 6 #right shift number by 6
+size_of_this_instruction = number_of_arguments + 1
+pc += size_of_this_instruction
+'''
