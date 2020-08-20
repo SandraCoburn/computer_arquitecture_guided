@@ -81,3 +81,8 @@ x & (n-1)
   - Stack bottom is reserved for the instructions at the bottom of thestack
 
 godbolt.org -- to check how the stack works
+
+## CPU Stack
+
+- Store pushed items in RAM
+- Pointer to the top of the stack
