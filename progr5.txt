@@ -1,0 +1,25 @@
+3 #SAVE_REG RO, 8
+0
+10
+7 # CALL R0 <-- PC
+0
+7 # CALL R0
+0
+7 # CALL R0
+0
+2 #HALT
+
+#Subroutine:
+
+1 # PRINT_BEEJ
+3 # SAVE_REG R4 37
+4
+37
+4 # PRINT_REG R4 3
+4
+8 #RET
+
+
+   
+
+ 

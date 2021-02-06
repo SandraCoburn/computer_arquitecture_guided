@@ -1,6 +1,6 @@
 # computer_arquitecture_guided
 
-# Number Bases
+## Number Bases
 
 - Base 2 - binary 0-1
 - Base 8 - octal 0-7
@@ -86,3 +86,12 @@ godbolt.org -- to check how the stack works
 
 - Store pushed items in RAM
 - Pointer to the top of the stack
+
+## Subroutines
+
+- We need a Stack to save the address where a function is to be executed
+
+### Stack subroutien
+
+- When you call, push the return addr on the stack, jump to the funnction
+- When you return , pop the return addr off the stack, set the PC to it

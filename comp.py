@@ -3,7 +3,12 @@
 # 2 - HALT
 # 3 - SAVE_REG store a value in a register
 # 4 - PRINT_REG print the register value ind ecimal
+# 5 - PUSH
+# 6 - POP
+# 7 - CALL
+# 8 - RET
 import sys
+import dis
 memory = [0] * 256 # think of as a big array of bytes, 8-bits per byte
 address = 0
 registers = [0] * 8
@@ -77,7 +82,7 @@ if address == 0:
 registers[3] = 37
 '''
 registers = [0] * 8
-
+SP = 7
 running = True
 pc = 0 #program counter, the index into memory of the currently-executing instructions (extruction pointer)
 while running:
@@ -108,15 +113,67 @@ while running:
         #store it on the stack
         top_of_stack_addr = registers[7]
         memory[top_of_stack_addr] = value
-        pc += 2
         print(f"stack: {memory[0xE4:0xF4]}")
+        pc += 2
+        
+    elif ir == 6: #POP
+        #Get value from the top of the stack
+        top_of_stack_addr = registers[7]
+        value = memory[top_of_stack_addr]
+        #Get the register number and store the value there
+        reg_num = memory[pc+1]
+        registers[reg_num] = value
+        pc += 2
+    elif ir == 7: # CALL
+        # push return address
+        ret_addr = pc + 2
+        registers[SP] -= 1
+        memory[registers[SP]] = ret_addr
+        #call the subroutine
+        reg_num = memory[pc+1]
+        pc = registers[reg_num]
+        #dont_set_pc = True
+    elif ir == 8: #RET
+        #pop the return add off the stack
+        ret_addr = memory[registers[SP]]
+        registers[SP] += 1
+        #set the pc ot it
+        pc = ret_addr
     else:
         print(f"Invalid instruction {ir} code at address {pc}")
         sys.exit()
-    
-    '''
-    #This doesn't work for this guided but will for the ls8.py :
-    number_of_arguments = ir >> 6 #right shift number by 6
-    size_of_this_instruction = number_of_arguments + 1
-    pc += size_of_this_instruction
-    '''
+    if ir & 0b00010000 == 0:
+        pc =+ (ir >> 6) + 1
+dis.dis("__main__")  #to check for the amount of memory
+'''
+#This doesn't work for this guided but will for the ls8.py :
+number_of_arguments = ir >> 6 #right shift number by 6
+size_of_this_instruction = number_of_arguments + 1
+pc += size_of_this_instruction
+'''
+'''
+    #print("ir",ir)
+                ## Get register number
+                reg = self.ram[pc+1]
+                ### Get the addresa to jump to, from the register.
+                address = self.reg[reg]
+                print("address", address)
+                ### push command after CALL onto the stack
+                return_address = pc + 2
+                ### decrement stack pointer
+                self.reg[7] -= 1
+                sp = self.reg[7]
+                print("stack", sp)
+                ### put the return address ont he stack
+                self.ram[sp] = return_address
+                ### then look at register, jump to that address
+                pc = address
+                self.trace()
+
+ # pop the return address off the stack
+                sp = self.reg[7]
+                return_address = self.ram[sp]
+                self.reg[7] += 1
+                # go to the return address. set the pc to return address
+                pc = return_address
+'''
