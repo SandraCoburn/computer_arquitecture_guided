@@ -42,6 +42,15 @@ memory = [
     
 ]
 
+def nested_print_num():
+    print(99)
+    return
+def first_print_tim():
+    print("tim")
+    nested_print_num()
+    return
+first_print_tim()
+
 #Write a pogram to pull each command out of memory and execute
 
 # We can loop over it!

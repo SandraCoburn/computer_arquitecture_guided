@@ -90,3 +90,8 @@ godbolt.org -- to check how the stack works
 ## Subroutines
 
 - We need a Stack to save the address where a function is to be executed
+
+### Stack subroutien
+
+- When you call, push the return addr on the stack, jump to the funnction
+- When you return , pop the return addr off the stack, set the PC to it
